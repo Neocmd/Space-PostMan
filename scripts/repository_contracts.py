@@ -16,10 +16,17 @@ REQUIRED_FILES = [
     REPO_ROOT / "data" / "localization" / "ui.csv",
     REPO_ROOT / "data" / "localization" / "dialogue.csv",
     REPO_ROOT / "data" / "letters" / "letters_it.json",
+    REPO_ROOT / "rulesets" / "main-ruleset.json",
+    REPO_ROOT / "rulesets" / "develop-ruleset.json",
+    REPO_ROOT / "rulesets" / "README.md",
 ]
 
 ALLOWED_SCENES = {"GLOBAL", "C1_FREE_PRE", "C1_FREE_POST"}
 SCENE_PATTERN = re.compile(r"^###\s+(C1_VS_S\d{2})\b")
+RULESET_JSON_FILES = [
+    REPO_ROOT / "rulesets" / "main-ruleset.json",
+    REPO_ROOT / "rulesets" / "develop-ruleset.json",
+]
 
 
 def load_csv_rows(path: Path) -> list[dict[str, str]]:
@@ -156,12 +163,47 @@ def validate_letters_json() -> list[str]:
     return errors
 
 
+def validate_ruleset_jsons() -> list[str]:
+    errors: list[str] = []
+    for path in RULESET_JSON_FILES:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+
+        for key in ("name", "target", "enforcement", "bypass_actors", "conditions", "rules"):
+            if key not in payload:
+                errors.append(f"{path.name} missing key: {key}")
+
+        if payload.get("target") != "branch":
+            errors.append(f"{path.name} target must be 'branch'")
+        if payload.get("enforcement") != "active":
+            errors.append(f"{path.name} enforcement must be 'active'")
+
+        conditions = payload.get("conditions", {})
+        ref_name = conditions.get("ref_name", {}) if isinstance(conditions, dict) else {}
+        include = ref_name.get("include", []) if isinstance(ref_name, dict) else []
+        if not include:
+            errors.append(f"{path.name} must declare at least one ref_name include pattern")
+
+        rules = payload.get("rules", [])
+        if not isinstance(rules, list) or not rules:
+            errors.append(f"{path.name} must define a non-empty rules array")
+            continue
+
+        rule_types = {rule.get("type") for rule in rules if isinstance(rule, dict)}
+        required_rule_types = {"deletion", "non_fast_forward", "pull_request", "required_status_checks"}
+        missing = required_rule_types - rule_types
+        if missing:
+            errors.append(f"{path.name} missing required rule types: {sorted(missing)}")
+
+    return errors
+
+
 def run_all() -> list[str]:
     errors: list[str] = []
     errors.extend(validate_required_files())
     errors.extend(validate_ui_csv())
     errors.extend(validate_dialogue_csv())
     errors.extend(validate_letters_json())
+    errors.extend(validate_ruleset_jsons())
     return errors
 
 
