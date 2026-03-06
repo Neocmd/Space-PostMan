@@ -1,6 +1,6 @@
 # Rulesets
 
-Payload JSON per configurare le ruleset del repository `Neocmd/Space-PostMan`.
+Payload JSON e helper script per configurare le ruleset del repository `Neocmd/Space-PostMan`.
 
 ## File inclusi
 
@@ -12,6 +12,10 @@ Payload JSON per configurare le ruleset del repository `Neocmd/Space-PostMan`.
   Template con bypass admin in modalita `pull_request` per `main`.
 - `develop-ruleset.admin-bypass.template.json`
   Template con bypass admin in modalita `pull_request` per `develop`.
+- `apply-ruleset.ps1`
+  Script PowerShell per applicare una ruleset per volta via `gh api`.
+- `list-rulesets.ps1`
+  Script PowerShell per elencare le ruleset gia presenti sul repository.
 
 ## Perche ci sono due versioni
 
@@ -32,14 +36,36 @@ Per questo motivo:
 - blocco force push e cancellazione dei branch protetti
 - richiesta di risolvere le review threads nelle PR
 
-## Applicazione via GitHub CLI
+## Applicazione una per una via script
 
-### 1. Creare la ruleset di `main`
+### 1. Applicare la ruleset di `main`
+```powershell
+powershell -ExecutionPolicy Bypass -File .\rulesets\apply-ruleset.ps1 -Ruleset main
+```
+
+### 2. Applicare la ruleset di `develop`
+```powershell
+powershell -ExecutionPolicy Bypass -File .\rulesets\apply-ruleset.ps1 -Ruleset develop
+```
+
+### 3. Verificare le ruleset presenti
+```powershell
+powershell -ExecutionPolicy Bypass -File .\rulesets\list-rulesets.ps1
+```
+
+### 4. Dry run per controllare il payload prima dell'invio
+```powershell
+powershell -ExecutionPolicy Bypass -File .\rulesets\apply-ruleset.ps1 -Ruleset main -DryRun
+```
+
+## Applicazione via GitHub CLI senza script
+
+### `main`
 ```powershell
 gh api repos/Neocmd/Space-PostMan/rulesets --method POST --input rulesets/main-ruleset.json
 ```
 
-### 2. Creare la ruleset di `develop`
+### `develop`
 ```powershell
 gh api repos/Neocmd/Space-PostMan/rulesets --method POST --input rulesets/develop-ruleset.json
 ```

@@ -26,6 +26,8 @@ Indice operativo della documentazione di progetto.
 - [Rulesets README](../rulesets/README.md)
 - [Main Ruleset JSON](../rulesets/main-ruleset.json)
 - [Develop Ruleset JSON](../rulesets/develop-ruleset.json)
+- [Apply Ruleset Script](../rulesets/apply-ruleset.ps1)
+- [List Rulesets Script](../rulesets/list-rulesets.ps1)
 
 ## Tech
 
