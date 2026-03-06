@@ -1,0 +1,60 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  package-foundation:
+    name: package-foundation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate repository contracts
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/repository_contracts.py
+
+      - name: Package foundation bundle
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          if [[ "$GITHUB_REF" == refs/heads/develop ]]; then
+            VERSION="develop-${GITHUB_SHA::7}"
+          elif [[ "$GITHUB_REF" == refs/heads/main ]]; then
+            VERSION="main-${GITHUB_SHA::7}"
+          fi
+          python scripts/package_foundation_pack.py "$VERSION"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-pack-${{ github.ref_name }}
+          path: dist/*
+
+      - name: Publish GitHub release bundle
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/* --title "$GITHUB_REF_NAME" --notes "Automated foundation pack release."
+          fi

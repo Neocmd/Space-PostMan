@@ -1,5 +1,8 @@
 .godot/
 .import/
+dist/
+__pycache__/
+.venv/
 *.tmp
 *.log
 .DS_Store
