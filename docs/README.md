@@ -23,6 +23,9 @@ Indice operativo della documentazione di progetto.
 ## Process
 
 - [GitFlow and Releases](./process/GITFLOW_AND_RELEASES.md)
+- [Rulesets README](../rulesets/README.md)
+- [Main Ruleset JSON](../rulesets/main-ruleset.json)
+- [Develop Ruleset JSON](../rulesets/develop-ruleset.json)
 
 ## Tech
 
@@ -40,12 +43,14 @@ Indice operativo della documentazione di progetto.
 - [CI Workflow](../.github/workflows/ci.yml)
 - [CD Workflow](../.github/workflows/cd.yml)
 - [PR Template](../.github/pull_request_template.md)
+- [Repository Contracts Validator](../scripts/repository_contracts.py)
 
 ## Ordine di esecuzione consigliato
 
 1. Allineamento creativo e scope sul foundation pack.
-2. Allineamento di processo su `CONTRIBUTING.md` e `docs/process/GITFLOW_AND_RELEASES.md`.
-3. Planning di sprint con backlog e sprint board.
-4. Implementazione Godot del vertical slice usando states/triggers.
-5. Import dei dati runtime separati.
-6. Primo playtest del Capitolo 1.
+2. Allineamento di processo su `CONTRIBUTING.md`, `docs/process/GITFLOW_AND_RELEASES.md` e `rulesets/README.md`.
+3. Applicazione delle ruleset su GitHub.
+4. Planning di sprint con backlog e sprint board.
+5. Implementazione Godot del vertical slice usando states/triggers.
+6. Import dei dati runtime separati.
+7. Primo playtest del Capitolo 1.
