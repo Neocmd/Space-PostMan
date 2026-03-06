@@ -1,0 +1,23 @@
+{
+  "letters": {
+    "C1_LTR_001": {
+      "chapter": "C1",
+      "title": "Il pane del mattino",
+      "sender": "Rosa Ferri",
+      "recipient": "Beppe Ferri",
+      "read_time_seconds": 25,
+      "fragments": [
+        "metto ancora da parte il primo pane",
+        "continuo a guardare la porta laterale",
+        "la tua chiave e ancora sotto la cassa blu",
+        "il pane si raffredda in fretta"
+      ],
+      "body": "Beppe,\nmetto ancora da parte il primo pane prima dell'alba.\nDico a tutti che e solo abitudine, ma non e vero. Lo faccio perche continuo a guardare la porta laterale come se dovessi entrare da un momento all'altro, con le scarpe bagnate e una scusa cattiva pronta in bocca.\nDopo papa ho stretto tutto troppo forte, anche te.\nPensavo fosse un modo per non perdere altro. Ti ho solo spinto piu lontano.\nSe vuoi, la tua chiave e ancora sotto la cassa blu.\nIl pane si raffredda in fretta.\nIo no.\nRosa",
+      "presentation": {
+        "fragment_count": 4,
+        "show_in_archive_after_complete": true,
+        "scene_id": "C1_VS_S06"
+      }
+    }
+  }
+}
