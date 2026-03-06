@@ -27,6 +27,18 @@ Per questo motivo:
 - i file `main-ruleset.json` e `develop-ruleset.json` sono sicuri da applicare subito;
 - il bypass admin per emergenze e meglio aggiungerlo da UI, oppure compilando il template dopo avere verificato il valore corretto nel tuo ambiente.
 
+## Nota importante sul check richiesto
+
+Nel payload finale il check richiesto e espresso solo come:
+
+```json
+{
+  "context": "repository-contracts"
+}
+```
+
+Il campo `integration_id` e stato volutamente omesso. La REST API di GitHub lo tratta come opzionale, ma passando `null` il server puo rispondere con `HTTP 422` sul rule object `required_status_checks`.
+
 ## Impostazioni scelte in base alle tue risposte
 
 - unico maintainer per ora
