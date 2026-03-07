@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[node name="BakeryBack" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="SideDoor" type="Node2D" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]

@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://crtep2kftirfi"]
+
+[ext_resource type="Script" uid="uid://b2uvkppy67nt6" path="res://scripts/chapter1/c1_controller.gd" id="1"]
+[ext_resource type="Script" uid="uid://bnffsjasb7w8f" path="res://scenes/world/village_slice_root.gd" id="1_q0ixs"]
+[ext_resource type="Script" uid="uid://c6yafud313cck" path="res://scripts/chapter1/c1_world_state.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2_nh217"]
+[ext_resource type="Script" uid="uid://tbqsdx1hodf0" path="res://scripts/player/nico_controller.gd" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_q0ixs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/letter_view.tscn" id="4_h0j7f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oocaa"]
+radius = 16.0
+height = 48.0
+
+[node name="VillageSliceRoot" type="Node2D" unique_id=506098675]
+script = ExtResource("1_q0ixs")
+
+[node name="BackgroundLayer" type="Node2D" parent="." unique_id=1045919320]
+
+[node name="NavigationRoot" type="Node2D" parent="." unique_id=2135009538]
+
+[node name="PropsRoot" type="Node2D" parent="." unique_id=874358046]
+
+[node name="NPCsRoot" type="Node2D" parent="." unique_id=573555838]
+
+[node name="TriggersRoot" type="Node2D" parent="." unique_id=26404886]
+
+[node name="FXRoot" type="Node2D" parent="." unique_id=1075466071]
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=474602015]
+
+[node name="Nico" type="CharacterBody2D" parent="." unique_id=804559154]
+script = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nico" unique_id=893180294]
+shape = SubResource("CapsuleShape2D_oocaa")
+
+[node name="Camera2D" type="Camera2D" parent="Nico" unique_id=1554465385]
+
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="." unique_id=1785801484]
+
+[node name="HUD" parent="HUDCanvasLayer" unique_id=1251333304 instance=ExtResource("2_nh217")]
+layout_mode = 3
+anchors_preset = 15
+
+[node name="DialogueBox" parent="HUDCanvasLayer" unique_id=1854983299 instance=ExtResource("3_q0ixs")]
+layout_mode = 3
+
+[node name="LetterView" parent="HUDCanvasLayer" unique_id=1293980477 instance=ExtResource("4_h0j7f")]
+layout_mode = 3
+anchors_preset = 15
+
+[node name="AudioRoot" type="Node" parent="." unique_id=645393284]
+
+[node name="C1Controller" type="Node" parent="." unique_id=858469630]
+script = ExtResource("1")
+
+[node name="C1WorldState" type="Node" parent="." unique_id=1614254657]
+script = ExtResource("2")

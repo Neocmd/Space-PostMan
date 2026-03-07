@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/puzzles/recipient_deduction.gd" id="1"]
+
+[node name="RecipientDeduction" type="Control"]
+script = ExtResource("1")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchor_left = 0.1
+anchor_top = 0.25
+anchor_right = 0.9
+anchor_bottom = 0.75
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+
+[node name="Question" type="Label" parent="Panel/VBox"]
+text = "A chi appartiene la lettera?"
+
+[node name="HintLabel" type="Label" parent="Panel/VBox"]
+visible = false
+
+[node name="RosaButton" type="Button" parent="Panel/VBox"]
+text = "Rosa Ferri"
+
+[node name="BeppeButton" type="Button" parent="Panel/VBox"]
+text = "Beppe Ferri"

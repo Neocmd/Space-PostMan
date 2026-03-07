@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/letter_view_controller.gd" id="1"]
+
+[node name="LetterView" type="Control"]
+script = ExtResource("1")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.1, 0.92)
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+text = ""
+
+[node name="Body" type="Label" parent="Panel/VBox"]
+text = ""
+autowrap_mode = 3
+
+[node name="Close" type="Button" parent="Panel/VBox"]
+text = "Chiudi"
+alignment = 2

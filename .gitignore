@@ -1,6 +1,7 @@
 .godot/
 .import/
 dist/
+*.translation
 __pycache__/
 .venv/
 *.tmp
